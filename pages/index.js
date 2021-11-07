@@ -48,13 +48,13 @@ export default function CreateItem() {
   const chainId = useSelector((state) => state.chainId);
   const handleDragStart = (e) => e.preventDefault();
   const items = [
-      <Image src={knifepng1} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng2} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng3} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng4} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng5} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng6} onDragStart={handleDragStart}></Image>,
-      <Image src={knifepng7} onDragStart={handleDragStart}></Image>,
+      <Image key="1"src={knifepng1} onDragStart={handleDragStart}></Image>,
+      <Image key="2"src={knifepng2} onDragStart={handleDragStart}></Image>,
+      <Image key="3"src={knifepng3} onDragStart={handleDragStart}></Image>,
+      <Image key="3"src={knifepng4} onDragStart={handleDragStart}></Image>,
+      <Image key="4"src={knifepng5} onDragStart={handleDragStart}></Image>,
+      <Image key="5"src={knifepng6} onDragStart={handleDragStart}></Image>,
+      <Image key="6"src={knifepng7} onDragStart={handleDragStart}></Image>,
     ];
 
   const responsive = {
