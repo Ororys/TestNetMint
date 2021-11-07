@@ -48,13 +48,13 @@ export default function CreateItem() {
   const chainId = useSelector((state) => state.chainId);
   const handleDragStart = (e) => e.preventDefault();
   const items = [
-      <Image key="1"src={knifepng1} onDragStart={handleDragStart}></Image>,
-      <Image key="2"src={knifepng2} onDragStart={handleDragStart}></Image>,
-      <Image key="3"src={knifepng3} onDragStart={handleDragStart}></Image>,
-      <Image key="3"src={knifepng4} onDragStart={handleDragStart}></Image>,
-      <Image key="4"src={knifepng5} onDragStart={handleDragStart}></Image>,
-      <Image key="5"src={knifepng6} onDragStart={handleDragStart}></Image>,
-      <Image key="6"src={knifepng7} onDragStart={handleDragStart}></Image>,
+      <Image key="1"src={knifepng1} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="2"src={knifepng2} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="3"src={knifepng3} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="3"src={knifepng4} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="4"src={knifepng5} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="5"src={knifepng6} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
+      <Image key="6"src={knifepng7} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
     ];
 
   const responsive = {
@@ -216,7 +216,7 @@ const setFrame = (props) => {
         <p className="text-brown-knife">Each artwork is original, with its own color palette and creation. <br></br> The objective was to make each Knife unique in order to prioritize quality over quantity.</p>
       </div>
       <div className="px-10 py-10 md:w-1/2">
-      <Image src={knifepng}></Image>
+      <Image src={knifepng} priority={true} alt="sideknife"></Image>
       </div>
     </div>
     <AliceCarousel mouseTracking items={items} responsive={responsive} autoPlay={true} animationDuration={800} infinite={true} disableDotsControls={true} disableButtonsControls={true}/>
