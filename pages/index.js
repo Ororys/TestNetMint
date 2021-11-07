@@ -42,7 +42,8 @@ export default function CreateItem() {
   // const [fileUrl, setFileUrl] = useState(null)
   // const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
   // const router = useRouter()
-  const [counter, setCounter] = useState()
+  const [counter, setCounter] = useState(3)
+  const limit = 20
   const [userCounter, setUserCounter] = useState()
   const [loading, setLoading] = useState(false)
   const chainId = useSelector((state) => state.chainId);
@@ -176,7 +177,16 @@ const setFrame = (props) => {
   const { duration, playbackRate } = props
   return window.pageYOffset / 300
 }
-
+  function increaseCounter(){
+    if (counter < limit){
+      setCounter(counter => counter + 1)
+    }
+}
+function decreaseCounter(){
+    if (counter > 1){
+      setCounter(counter => counter - 1)
+    }
+}
   return (
     <div>
     {/* <div> */}
@@ -203,10 +213,20 @@ const setFrame = (props) => {
       </video>
     </VideoScroll>
     </div> */}
+
     <div>
       <video autoPlay loop muted>
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
+      <div className="absolute flex flex-col transform -translate-x-1/2 -translate-y-1/2 top-3/4 left-1/2 font-mlp">
+        <div className="flex ">
+          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
+          <div className="px-6 py-4 text-white bg-black border border-white ">{counter}</div>
+          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
+          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black">Mint Knives</button>
+        </div>
+        <div className="w-full py-4 text-xs text-center text-white bg-black border border-white">265/4,444 Knives have already found their Soldier</div>
+      </div>
     </div>
     <div className="flex justify-between py-16 bg-black md:px-60">
       <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
