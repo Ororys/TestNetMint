@@ -63,7 +63,7 @@ export default function AlternateTimeline() {
           <TimelineDot className="bg-white"/>
           <TimelineConnector className="bg-white"/>
         </TimelineSeparator>
-        <TimelineContent className="text-xl text-white font-mlp">4. Knives Legacy videogame</TimelineContent>
+        <TimelineContent><p className="text-xl text-white font-mlp">4. Knives Legacy videogame</p></TimelineContent>
       </TimelineItem>
       {/* <TimelineItem >
         <TimelineSeparator>
