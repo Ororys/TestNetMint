@@ -20,8 +20,10 @@ module.exports = {
         light: '#52ccd6',
         DEFAULT: '#0037C1',
         dark: '#009eeb',
+        discord: "#4653D6"
       },
       pink: {
+        mekaverse:"#C52C64",
         light: '#ffc0e9',
         DEFAULT: '#ffc0e9',
         dark: '#fba5dd',
@@ -44,6 +46,7 @@ module.exports = {
         dark:'#321057'
       },
       black:{
+        light:"#030919",
         DEFAULT:'#000000'
       },
       white:{

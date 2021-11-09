@@ -5,7 +5,13 @@
 html {
     scroll-behavior: smooth;
 }
+body {
+    background-color: #000000;
+    /* background-image: url('../public/multicolor-small.jpg');
+    background-attachment: fixed;
+    background-size: cover; */
 
+}
 @layer base {
     @font-face {
         font-family: mlp;

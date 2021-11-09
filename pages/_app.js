@@ -9,6 +9,8 @@ import { ConnectWallet } from "../connectwallet";
 // import { ContractBalance } from '../contract-balance';
 import twitter from '../public/twitter.svg';
 import discord from '../public/discord.svg';
+import logo from '../public/logoknife.png';
+
 // import gitbook from '../public/gitbook.svg';
 import Image from 'next/image'
 import Head from 'next/head'
@@ -99,7 +101,7 @@ function MyApp({ Component, pageProps }) {
             {/* logo */}
             <div> 
               <Link href="/">
-                <a className="px-5 py-2 text-sm font-bold text-white align-middle shadow md:text-2xl bold font-mlp">Knives Legacy</a>
+                <a className="px-5 py-2 text-sm font-bold text-white align-middle shadow md:text-2xl bold font-mlp"> <Image height="100" width="100" src={logo} alt="logo"></Image></a>
               </Link>
             </div>
             
@@ -132,8 +134,8 @@ function MyApp({ Component, pageProps }) {
                   </a>
                   </Tooltip>
               </Link> */}
-              <a href="https://twitter.com/VelasPunks" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-blue-twitter"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
-              <a href="https://discord.gg/E3KrubuffW" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-purple-discord"><Image priority={true} src={discord} width={17} alt="discord" /></a>
+              <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-blue-twitter"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
+              <a href="http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-purple-discord"><Image priority={true} src={discord} width={17} alt="discord" /></a>
               <ConnectWallet />
             </div>
 
@@ -145,8 +147,8 @@ function MyApp({ Component, pageProps }) {
 
             {/* mobile */}
             <div className="flex items-center space-x-4 md:space-x-10 md:hidden">
-              <a href="https://twitter.com/VelasPunks" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={twitter}  alt="twitter" /></a>
-              <a href="https://discord.gg/E3KrubuffW" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={discord}  alt="discord" /></a>
+              <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={twitter}  alt="twitter" /></a>
+              <a href="https://http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={discord}  alt="discord" /></a>
               {/* <button onClick={changeHidden}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" stroke="white"/>
