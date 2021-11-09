@@ -258,7 +258,7 @@ function decreaseCounter(){
       <div className="w-1/2">
       <Image src={knifebottom} priority={true}></Image>
       </div>
-      <div className="flex flex-col justify-center px-10 text-lg text-white text-opacity-75 md:w-1/2 font-mlp">
+      <div className="flex flex-col justify-center px-10 text-base text-white text-opacity-75 md:w-1/2 font-mlp">
         <p className="mb-4 text-4xl text-white text-opacity-100">Join the community</p>
         <p>We are not a simple NFT project, we are an army.</p>
         <p className="mb-4">And an army always has it own communication system.</p>
