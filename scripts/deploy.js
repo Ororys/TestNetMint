@@ -4,15 +4,25 @@
 // When running the script with `npx hardhat run <script>` you'll find the Hardhat
 // Runtime Environment's members available in the global scope.
 const hre = require("hardhat");
+// const rarities = require('../rarities.json');
 
 async function main() {
   const [owner, acc2] = await ethers.getSigners();
 
 
   const KnivesLegacy = await ethers.getContractFactory("KnivesLegacy");
-  const knives_legacy = await KnivesLegacy.deploy("KnivesLegacy", "KNIVES","baseuri.com","0x0","0x0");
+  const knives_legacy = await KnivesLegacy.deploy("KnivesLegacy", "KNIVES","https://kniveslegacy.s3.eu-west-2.amazonaws.com/metadata/","0xcd23889A2dD59650295b4b7d417e71D0c7b4727d");
   await knives_legacy.deployed();
   console.log("NFT deployed to:", knives_legacy.address);
+ 
+  // await knives_legacy.setRarities(rarities)
+  // let rarity1 = await knives_legacy.getRarity(1)
+  // let rarity2 = await knives_legacy.getRarity(2)
+  // let rarity3 = await knives_legacy.getRarity(3)
+  // let rarity65 = await knives_legacy.getRarity(65)
+  // console.log(rarity2.toNumber())
+  // console.log(rarity3.toNumber())
+  // console.log(rarity65.toNumber())
   // await pony.setBaseURI("https://gateway.pinata.cloud/ipfs/QmVtfWfm5yPFEy7DoSasXFob2iuXtfyBbmpbLZkFDCD927/")
   //unpause
 //   await pony.setMarketplaceState(marketAddress)

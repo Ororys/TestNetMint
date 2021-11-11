@@ -27,12 +27,13 @@ import dynamic from 'next/dynamic'
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Image from 'next/image'
+import axios from 'axios'
 
 
 // import { VideoScroll } from 'react-video-scroll'
-const VideoScroll = dynamic(() => import('react-video-scroll').then((module)=> module.VideoScroll), {
-  ssr: false
-});
+// const VideoScroll = dynamic(() => import('react-video-scroll').then((module)=> module.VideoScroll), {
+//   ssr: false
+// });
 
 
 import {
@@ -47,8 +48,10 @@ export default function CreateItem() {
   // const router = useRouter()
   const [counter, setCounter] = useState(3)
   const limit = 20
-  const [userCounter, setUserCounter] = useState()
+  const [nfts, setNfts] = useState([])  
+  const [mintCounter, setMintCounter] = useState()
   const [loading, setLoading] = useState(false)
+  const cost_avax = 2;
   const chainId = useSelector((state) => state.chainId);
   const handleDragStart = (e) => e.preventDefault();
   const items = [
@@ -72,16 +75,48 @@ export default function CreateItem() {
   useEffect(() => {
     if (chainId == contractChainId) {
       checkMinted()
+      loadNFTs()
       // checkUserMinted()
     }
   }, [checkMinted])
 
   async function checkMinted(){
-    // const provider = new ethers.providers.Web3Provider(window.ethereum)
+    const provider = new ethers.providers.Web3Provider(window.ethereum)
     const contract = new ethers.Contract(nftaddress, NFT.abi, provider)
     let tcounter = await contract.totalSupply()
     // console.log(tcounter)
-    setCounter(counter => tcounter.toNumber())
+    setMintCounter(mintCounter => tcounter.toNumber())
+    console.log(tcounter)
+  }
+
+  async function loadNFTs() {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
+    const tokenids = await tokenContract.walletOfOwner()
+    console.log(tokenids)
+    // const data = await marketContract.fetchItemsPurchased()
+    const items = await Promise.all(tokenids.map(async i => {
+       const tokenUri = await tokenContract.tokenURI(i)
+      //  console.log(tokenUri)
+       const meta = await axios.get(tokenUri)
+       let item = {
+         tokenId: i.toNumber(),
+         name: meta.data.name,
+         image: meta.data.image,
+         attr0: meta.data.attributes[0].value,
+         attr1: meta.data.attributes[1].value,
+         attr2: meta.data.attributes[2].value,
+       }
+       return item
+      }))
+    setNfts(items)
+    // setLoadingState('loaded') 
+    // console.log("test")
   }
 
   // async function checkUserMinted(){
@@ -125,7 +160,7 @@ export default function CreateItem() {
   //     console.log('Error uploading file: ', error)
   //   }  
   // }
-  async function mint() {
+  async function mint(n_nft) {
     // const provider = new ethers.providers.Web3Provider(window.ethereum);
     // const signer = provider.getSigner()
     const web3Modal = new Web3Modal()
@@ -134,7 +169,9 @@ export default function CreateItem() {
     const signer = provider.getSigner()
 
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
-    let transaction = await contract.mint()
+    const total_cost_avax = n_nft * cost_avax
+    const total_cost_wei = ethers.utils.parseUnits(total_cost_avax.toString(), 'ether')
+    let transaction = await contract.mint(n_nft, {value:total_cost_wei})
     console.log("Mining...", transaction.hash)
     setLoading(loading => true)
     try {
@@ -144,7 +181,8 @@ export default function CreateItem() {
     } catch (e) {
       setLoading(loading => false)
     }
-    const tcounter = await contract.getTokenCounter()
+    
+    const tcounter = await contract.totalSupply()
     setCounter(counter => tcounter.toNumber())
     // const available_mint = await contract.getAvaliableMint()
     // setUserCounter(userCounter => available_mint.toNumber())
@@ -162,24 +200,24 @@ export default function CreateItem() {
     return <span className="mx-auto text-xl text-white font-mlp">{days} Days {hours}:{minutes}:{seconds}</span>;
   //}
 };
-const setStyles = (wrapperEl, videoEl, playbackRate) => {
-  wrapperEl.style.marginTop = `calc(180% - ${Math.floor(videoEl.duration) *
-    playbackRate +
-    'px'})`
-  wrapperEl.style.marginBottom = `calc(180% - ${Math.floor(videoEl.duration) *
-    playbackRate +
-    'px'})`
-}
+// const setStyles = (wrapperEl, videoEl, playbackRate) => {
+//   wrapperEl.style.marginTop = `calc(180% - ${Math.floor(videoEl.duration) *
+//     playbackRate +
+//     'px'})`
+//   wrapperEl.style.marginBottom = `calc(180% - ${Math.floor(videoEl.duration) *
+//     playbackRate +
+//     'px'})`
+// }
 
-const onScroll = (wrapperEl) => {
-  wrapperEl.style.marginTop = window.pageYOffset
-  // setState({ frame: Math.floor(currentFrame)})
-}
+// const onScroll = (wrapperEl) => {
+//   wrapperEl.style.marginTop = window.pageYOffset
+//   // setState({ frame: Math.floor(currentFrame)})
+// }
 
-const setFrame = (props) => {
-  const { duration, playbackRate } = props
-  return window.pageYOffset / 300
-}
+// const setFrame = (props) => {
+//   const { duration, playbackRate } = props
+//   return window.pageYOffset / 300
+// }
   function increaseCounter(){
     if (counter < limit){
       setCounter(counter => counter + 1)
@@ -242,9 +280,9 @@ function decreaseCounter(){
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
           <div className="px-6 py-4 text-white bg-black border border-white ">{counter}</div>
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
-          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black">Mint Knives</button>
+          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
         </div>
-        <div className="w-4/5 py-4 mx-auto mb-3 text-center text-white bg-black border border-white">265/4,444 already minted</div>
+        <div className="w-4/5 py-4 mx-auto mb-3 text-center text-white bg-black border border-white">{mintCounter}/4,444 already minted</div>
         <Countdown className="mx-auto" date="2021-11-19T18:00:00" renderer={renderer}/>
       </div>
       <div className="px-10 py-10 md:w-1/2">
@@ -275,6 +313,23 @@ function decreaseCounter(){
       <p className="text-sm text-brown-knife"> 4,444 Knives which need soldiers</p>
       <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
     </div>
+    <div className="grid grid-cols-1 gap-10 pt-4 sm:grid-cols-1 lg:grid-cols-6"> 
+          {
+            nfts.map((nft, i) => (
+              <div key={i} className="overflow-hidden transition ease-out transform shadow-2xl hover:scale-110 duration-30">
+                <img src={nft.image} />
+                <div className={"p-4 bg-gradient-radial"}>
+                <p className="mb-2 text-3xl text-white font-mlp">{nft.name}</p>
+                <p className="mb-2 text-3xl text-white font-mlp">{nft.attr0}</p>
+                <p className="mb-2 text-3xl text-white font-mlp">{nft.attr1}</p>
+
+                  
+        
+                </div>
+              </div>
+            ))
+          }
+        </div>
     </div>
     // <div>
     // <div className="flex flex-col items-center justify-center">
