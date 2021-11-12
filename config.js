@@ -1,5 +1,5 @@
 // export const nftmarketaddress = "0x46ac6A0a853fB2F3eA1BD2B0b13bc23208c7657F"
-export const nftaddress = "0xE265d51Cf4BA75E0De17987bF721817f0B0Fbb1b"
+export const nftaddress = "0x45872F33FA752c3038788f2d26958Eb513b5e3Ee"
 // export const ponyataaddress = "0x833a465E146665735212d8A36bE0dFcB58Aab681"
 export const contractChainId = 1
 // export const contractChainId = 43114

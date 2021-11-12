@@ -11,9 +11,9 @@ contract KnivesLegacy is ERC721Enumerable, Ownable {
   string public baseURI;
   string public baseExtension = ".json";
   string public notRevealedUri;
-  uint256 public cost = 2 ether;
-  uint256 public maxSupply = 20;
-  uint256 public maxMintAmount = 20;
+  uint256 public cost = 0.15 ether;// !!!!!!!!!!!!!!!!!
+  uint256 public maxSupply = 4444;
+  uint256 public maxMintAmount = 5;
   uint256 public royaltyValue; //500 = 5%
   uint256 public devShare = 5;
   bool public paused = false;
@@ -113,7 +113,7 @@ contract KnivesLegacy is ERC721Enumerable, Ownable {
 
     // grab a number from the tail
     cache[i] = cache[remaining - 1] == 0 ? remaining - 1 : cache[remaining - 1];
-    return tokenId;
+    return tokenId + 1;
     }
 
   //only owner

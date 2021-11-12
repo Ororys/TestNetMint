@@ -11,7 +11,7 @@ async function main() {
 
 
   const KnivesLegacy = await ethers.getContractFactory("KnivesLegacy");
-  const knives_legacy = await KnivesLegacy.deploy("KnivesLegacy", "KNIVES","https://kniveslegacy.s3.eu-west-2.amazonaws.com/metadata/","0xcd23889A2dD59650295b4b7d417e71D0c7b4727d");
+  const knives_legacy = await KnivesLegacy.deploy("KnivesLegacy", "KNIVES","https://ipfs.io/ipfs/QmPng9SjXxB3Vsud6h2rZPPjnVgSWFN1eGKRaAJ8JfFVfd/","0x0");
   await knives_legacy.deployed();
   console.log("NFT deployed to:", knives_legacy.address);
  

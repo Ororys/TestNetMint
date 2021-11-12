@@ -47,12 +47,14 @@ export default function CreateItem() {
   // const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
   // const router = useRouter()
   const [counter, setCounter] = useState(3)
-  const limit = 20
+  const limit = 5
   const [nfts, setNfts] = useState([])  
   const [mintCounter, setMintCounter] = useState()
   const [loading, setLoading] = useState(false)
-  const cost_avax = 2;
+  // const [cost, setCost] = useState(1.5);
   const chainId = useSelector((state) => state.chainId);
+  const account = useSelector((state) => state.account);
+  
   const handleDragStart = (e) => e.preventDefault();
   const items = [
       <Image key="1"src={knifepng1} onDragStart={handleDragStart} priority={true} alt="carousel"></Image>,
@@ -72,13 +74,13 @@ export default function CreateItem() {
     // 5: { items: 5 },
 };
 
-  useEffect(() => {
+  useEffect(async() => {
     if (chainId == contractChainId) {
-      checkMinted()
-      loadNFTs()
+      await checkMinted()
+      await loadNFTs()
       // checkUserMinted()
     }
-  }, [checkMinted])
+  }, [loadNFTs])
 
   async function checkMinted(){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -86,7 +88,8 @@ export default function CreateItem() {
     let tcounter = await contract.totalSupply()
     // console.log(tcounter)
     setMintCounter(mintCounter => tcounter.toNumber())
-    console.log(tcounter)
+    // console.log(tcounter)
+    // console.log(chainId)
   }
 
   async function loadNFTs() {
@@ -98,7 +101,6 @@ export default function CreateItem() {
     // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
     const tokenids = await tokenContract.walletOfOwner()
-    console.log(tokenids)
     // const data = await marketContract.fetchItemsPurchased()
     const items = await Promise.all(tokenids.map(async i => {
        const tokenUri = await tokenContract.tokenURI(i)
@@ -108,12 +110,24 @@ export default function CreateItem() {
          tokenId: i.toNumber(),
          name: meta.data.name,
          image: meta.data.image,
+         nattr0: meta.data.attributes[0].trait_type,
+         nattr1: meta.data.attributes[1].trait_type,
+         nattr2: meta.data.attributes[2].trait_type,
+         nattr3: meta.data.attributes[3].trait_type,
+         nattr4: meta.data.attributes[4].trait_type,
+         nattr5: meta.data.attributes[5].trait_type,
+         nattr6: meta.data.attributes[6].trait_type,
          attr0: meta.data.attributes[0].value,
          attr1: meta.data.attributes[1].value,
          attr2: meta.data.attributes[2].value,
+         attr3: meta.data.attributes[3].value,
+         attr4: meta.data.attributes[4].value,
+         attr5: meta.data.attributes[5].value,
+         attr6: meta.data.attributes[6].value,
        }
        return item
       }))
+    console.log(items)
     setNfts(items)
     // setLoadingState('loaded') 
     // console.log("test")
@@ -169,9 +183,18 @@ export default function CreateItem() {
     const signer = provider.getSigner()
 
     let contract = new ethers.Contract(nftaddress, NFT.abi, signer)
-    const total_cost_avax = n_nft * cost_avax
-    const total_cost_wei = ethers.utils.parseUnits(total_cost_avax.toString(), 'ether')
-    let transaction = await contract.mint(n_nft, {value:total_cost_wei})
+    let cost_wei = await contract.cost()
+    let total_cost_wei = n_nft * cost_wei
+    total_cost_wei = total_cost_wei.toString()
+    // const total_cost_wei = ethers.utils.parseUnits(total_cost_avax.toString(), 'ether')
+    console.log(String(account))
+    let transaction
+    // if (account === ){
+    //   console.log("yo")
+    //   transaction = await contract.mint(n_nft)
+    // } else {
+    transaction = await contract.mint(n_nft, {value:total_cost_wei})
+    // }
     console.log("Mining...", transaction.hash)
     setLoading(loading => true)
     try {
@@ -183,12 +206,18 @@ export default function CreateItem() {
     }
     
     const tcounter = await contract.totalSupply()
-    setCounter(counter => tcounter.toNumber())
+    setMintCounter(mintCounter => tcounter.toNumber())
     // const available_mint = await contract.getAvaliableMint()
     // setUserCounter(userCounter => available_mint.toNumber())
   }
 
-  
+
+  // const freemintbutton = ({account}) =>{
+  //   if (account == ""){
+  //     return <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black" onClick={() => freemint(counter)}>Mint Knives</button>
+  //   }
+
+  // }
   const renderer = ({ days,hours, minutes, seconds, completed }) => {
   // if (completed) {
   //   // Render a completed state
@@ -313,15 +342,23 @@ function decreaseCounter(){
       <p className="text-sm text-brown-knife"> 4,444 Knives which need soldiers</p>
       <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
     </div>
-    <div className="grid grid-cols-1 gap-10 pt-4 sm:grid-cols-1 lg:grid-cols-6"> 
+    <div className="grid grid-cols-1 gap-10 px-10 pt-4 mx-auto sm:grid-cols-1 lg:grid-cols-6"> 
           {
             nfts.map((nft, i) => (
               <div key={i} className="overflow-hidden transition ease-out transform shadow-2xl hover:scale-110 duration-30">
                 <img src={nft.image} />
-                <div className={"p-4 bg-gradient-radial"}>
-                <p className="mb-2 text-3xl text-white font-mlp">{nft.name}</p>
-                <p className="mb-2 text-3xl text-white font-mlp">{nft.attr0}</p>
-                <p className="mb-2 text-3xl text-white font-mlp">{nft.attr1}</p>
+                <div className="p-4 bg-black-light">
+                <p className="mb-2 text-sm text-white font-mlp">{nft.name}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr0}: {nft.attr0}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr1}: {nft.attr1}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr2}: {nft.attr2}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr3}: {nft.attr3}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr4}: {nft.attr4}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr5}: {nft.attr5}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr6}: {nft.attr6}</p>
+
+
+
 
                   
         
