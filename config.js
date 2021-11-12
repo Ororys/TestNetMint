@@ -4,7 +4,6 @@ export const nftaddress = "0x45872F33FA752c3038788f2d26958Eb513b5e3Ee"
 export const contractChainId = 1
 // export const contractChainId = 43114
 
-
 // MAINNET CONTRACTS
 
 // export const nftmarketaddress = "0x9627756E2B4f672D0b2B5100996b30497BDc2A00"
