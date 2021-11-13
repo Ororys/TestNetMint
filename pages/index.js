@@ -48,7 +48,7 @@ export default function CreateItem() {
   // const router = useRouter()
   const [counter, setCounter] = useState(3)
   const limit = 5
-  const [nfts, setNfts] = useState([])  
+  // const [nfts, setNfts] = useState([])  
   const [mintCounter, setMintCounter] = useState()
   const [loading, setLoading] = useState(false)
   // const [cost, setCost] = useState(1.5);
@@ -77,10 +77,9 @@ export default function CreateItem() {
   useEffect(async() => {
     if (chainId == contractChainId) {
       await checkMinted()
-      await loadNFTs()
       // checkUserMinted()
     }
-  }, [loadNFTs])
+  }, [checkMinted])
 
   async function checkMinted(){
     const provider = new ethers.providers.Web3Provider(window.ethereum)
@@ -92,46 +91,46 @@ export default function CreateItem() {
     // console.log(chainId)
   }
 
-  async function loadNFTs() {
-    const web3Modal = new Web3Modal()
-    const connection = await web3Modal.connect()
-    const provider = new ethers.providers.Web3Provider(connection)
-    const signer = provider.getSigner()
+  // async function loadNFTs() {
+  //   const web3Modal = new Web3Modal()
+  //   const connection = await web3Modal.connect()
+  //   const provider = new ethers.providers.Web3Provider(connection)
+  //   const signer = provider.getSigner()
 
-    // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
-    const tokenids = await tokenContract.walletOfOwner()
-    // const data = await marketContract.fetchItemsPurchased()
-    const items = await Promise.all(tokenids.map(async i => {
-       const tokenUri = await tokenContract.tokenURI(i)
-      //  console.log(tokenUri)
-       const meta = await axios.get(tokenUri)
-       let item = {
-         tokenId: i.toNumber(),
-         name: meta.data.name,
-         image: meta.data.image,
-         nattr0: meta.data.attributes[0].trait_type,
-         nattr1: meta.data.attributes[1].trait_type,
-         nattr2: meta.data.attributes[2].trait_type,
-         nattr3: meta.data.attributes[3].trait_type,
-         nattr4: meta.data.attributes[4].trait_type,
-         nattr5: meta.data.attributes[5].trait_type,
-         nattr6: meta.data.attributes[6].trait_type,
-         attr0: meta.data.attributes[0].value,
-         attr1: meta.data.attributes[1].value,
-         attr2: meta.data.attributes[2].value,
-         attr3: meta.data.attributes[3].value,
-         attr4: meta.data.attributes[4].value,
-         attr5: meta.data.attributes[5].value,
-         attr6: meta.data.attributes[6].value,
-       }
-       return item
-      }))
-    console.log(items)
-    setNfts(items)
-    // setLoadingState('loaded') 
-    // console.log("test")
-  }
+  //   // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+  //   const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
+  //   const tokenids = await tokenContract.walletOfOwner()
+  //   // const data = await marketContract.fetchItemsPurchased()
+  //   const items = await Promise.all(tokenids.map(async i => {
+  //      const tokenUri = await tokenContract.tokenURI(i)
+  //     //  console.log(tokenUri)
+  //      const meta = await axios.get(tokenUri)
+  //      let item = {
+  //        tokenId: i.toNumber(),
+  //        name: meta.data.name,
+  //        image: meta.data.image,
+  //        nattr0: meta.data.attributes[0].trait_type,
+  //        nattr1: meta.data.attributes[1].trait_type,
+  //        nattr2: meta.data.attributes[2].trait_type,
+  //        nattr3: meta.data.attributes[3].trait_type,
+  //        nattr4: meta.data.attributes[4].trait_type,
+  //        nattr5: meta.data.attributes[5].trait_type,
+  //        nattr6: meta.data.attributes[6].trait_type,
+  //        attr0: meta.data.attributes[0].value,
+  //        attr1: meta.data.attributes[1].value,
+  //        attr2: meta.data.attributes[2].value,
+  //        attr3: meta.data.attributes[3].value,
+  //        attr4: meta.data.attributes[4].value,
+  //        attr5: meta.data.attributes[5].value,
+  //        attr6: meta.data.attributes[6].value,
+  //      }
+  //      return item
+  //     }))
+  //   console.log(items)
+  //   setNfts(items)
+  //   // setLoadingState('loaded') 
+  //   // console.log("test")
+  // }
 
   // async function checkUserMinted(){
   //   const web3Modal = new Web3Modal()
@@ -298,18 +297,18 @@ function decreaseCounter(){
         </div>
         <div className="w-full py-4 text-center text-white bg-black border border-white">265/4,444 already minted</div>
       </div> */}
-    <div className="flex justify-between py-16 bg-black md:px-60">
+    <div className="flex justify-between py-16 bg-black md:px-60" id="mint">
       <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
-        <h1 className="mb-2 text-4xl text-red">4,444 unique Knives</h1>
+        <h1 className="mb-2 text-4xl text-pink-mekaverse">4,444 unique Knives</h1>
         <h1 className="mb-6 text-4xl">which need Soldiers.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
         <p className="mb-3 text-brown-knife">Each artwork is original, with its own color palette and creation. <br></br> The objective was to make each Knife unique in order to prioritize quality over quantity.</p>
         
         <div className="flex w-4/5 mx-auto">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
-          <div className="px-6 py-4 text-white bg-black border border-white ">{counter}</div>
+          <div className="px-6 py-4 bg-black border border-white text-pink-mekaverse ">{counter}</div>
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
-          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
+          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-pink-mekaverse hover:border-opacity-0 hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
         </div>
         <div className="w-4/5 py-4 mx-auto mb-3 text-center text-white bg-black border border-white">{mintCounter}/4,444 already minted</div>
         <Countdown className="mx-auto" date="2021-11-19T18:00:00" renderer={renderer}/>
@@ -342,7 +341,7 @@ function decreaseCounter(){
       <p className="text-sm text-brown-knife"> 4,444 Knives which need soldiers</p>
       <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
     </div>
-    <div className="grid grid-cols-1 gap-10 px-10 pt-4 mx-auto sm:grid-cols-1 lg:grid-cols-6"> 
+    {/* <div className="grid grid-cols-1 gap-10 px-10 pt-4 mx-auto sm:grid-cols-1 lg:grid-cols-6"> 
           {
             nfts.map((nft, i) => (
               <div key={i} className="overflow-hidden transition ease-out transform shadow-2xl hover:scale-110 duration-30">
@@ -366,7 +365,7 @@ function decreaseCounter(){
               </div>
             ))
           }
-        </div>
+        </div> */}
     </div>
     // <div>
     // <div className="flex flex-col items-center justify-center">

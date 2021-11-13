@@ -134,8 +134,18 @@ function MyApp({ Component, pageProps }) {
                   </a>
                   </Tooltip>
               </Link> */}
-              <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-blue-twitter"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
-              <a href="http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 transform border border-white hover:scale-110 hover:bg-purple-discord"><Image priority={true} src={discord} width={17} alt="discord" /></a>
+              <Link href="/#mint">
+                <a className="text-base text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                  Mint
+                </a>
+              </Link>
+              <Link href="/mynfts">
+              <a className="text-base text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                My Knives
+              </a>
+              </Link>
+              <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 ease-out transform border border-white hover:scale-110 hover:bg-pink-mekaverse"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
+              <a href="http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 ease-out transform border border-white hover:scale-110 hover:bg-pink-mekaverse"><Image priority={true} src={discord} width={17} alt="discord" /></a>
               <ConnectWallet />
             </div>
 
