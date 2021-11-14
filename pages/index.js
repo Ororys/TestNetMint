@@ -283,7 +283,7 @@ function decreaseCounter(){
     </VideoScroll>
     </div> */}
 
-    <div>
+    <div className="hidden md:block">
       <video autoPlay loop muted>
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
