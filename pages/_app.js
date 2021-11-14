@@ -99,7 +99,7 @@ function MyApp({ Component, pageProps }) {
           <div className="flex px-6 py-8 md:justify-between md:py-14">
 
             {/* logo */}
-            <div className="hidden md:visible"> 
+            <div className="hidden md:block"> 
               <Link href="/">
                 <a className="px-5 py-2 text-sm font-bold text-white align-middle shadow md:text-2xl bold font-mlp"> <Image height="100" width="100" src={logo} alt="logo"></Image></a>
               </Link>
