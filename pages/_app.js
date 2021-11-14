@@ -96,10 +96,10 @@ function MyApp({ Component, pageProps }) {
       <nav className="bg-black">
         <div className="max-w-5xl mx-auto shadow">
         {/* max-w-6xl  */}
-          <div className="flex justify-between px-6 py-14">
+          <div className="flex px-6 py-8 md:justify-between md:py-14">
 
             {/* logo */}
-            <div> 
+            <div className="hidden md:visible"> 
               <Link href="/">
                 <a className="px-5 py-2 text-sm font-bold text-white align-middle shadow md:text-2xl bold font-mlp"> <Image height="100" width="100" src={logo} alt="logo"></Image></a>
               </Link>
@@ -156,8 +156,20 @@ function MyApp({ Component, pageProps }) {
             </div> */}
 
             {/* mobile */}
-            <div className="flex items-center space-x-4 md:space-x-10 md:hidden">
+            <div className="flex items-center justify-end space-x-4 md:space-x-10 md:hidden">
+              <ConnectWallet />
+              <Link href="/#mint">
+                <a className="text-xs text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                  Home
+                </a>
+              </Link>
+              <Link href="/mynfts">
+              <a className="text-xs text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                Knives
+              </a>
+              </Link>
               <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={twitter}  alt="twitter" /></a>
+              
               <a href="https://http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={discord}  alt="discord" /></a>
               {/* <button onClick={changeHidden}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

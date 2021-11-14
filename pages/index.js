@@ -297,20 +297,20 @@ function decreaseCounter(){
         </div>
         <div className="w-full py-4 text-center text-white bg-black border border-white">265/4,444 already minted</div>
       </div> */}
-    <div className="flex justify-between py-16 bg-black md:px-60" id="mint">
+    <div className="flex flex-col-reverse justify-between py-16 bg-black md:flex-row md:px-60" id="mint">
       <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
         <h1 className="mb-2 text-4xl text-pink-mekaverse">4,444 unique Knives</h1>
         <h1 className="mb-6 text-4xl">which need Soldiers.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
         <p className="mb-3 text-brown-knife">Each artwork is original, with its own color palette and creation. <br></br> The objective was to make each Knife unique in order to prioritize quality over quantity.</p>
         
-        <div className="flex w-4/5 mx-auto">
+        <div className="flex w-full mx-auto md:w-4/5">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
           <div className="px-6 py-4 bg-black border border-white text-pink-mekaverse ">{counter}</div>
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
           <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-pink-mekaverse hover:border-opacity-0 hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
         </div>
-        <div className="w-4/5 py-4 mx-auto mb-3 text-center text-white bg-black border border-white">{mintCounter}/4,444 already minted</div>
+        <div className="w-full py-4 mx-auto mb-3 text-center text-white bg-black border border-white md:w-4/5">{mintCounter}/4,444 already minted</div>
         <Countdown className="mx-auto" date="2021-11-19T18:00:00" renderer={renderer}/>
       </div>
       <div className="px-10 py-10 md:w-1/2">
@@ -320,8 +320,8 @@ function decreaseCounter(){
     <AliceCarousel mouseTracking items={items} responsive={responsive} autoPlay={true} animationDuration={800} infinite={true} disableDotsControls={true} disableButtonsControls={true}/>
     <h1 className="m-16 text-3xl text-center text-white bg-black font-mlp" id="roadmap">Roadmap</h1>
     <div className="m-auto mb-40 bg-black md:w-2/3" ><AlternateTimeline /></div>
-    <div className="flex justify-between py-2 bg-no-repeat bg-cover md:px-72" style={{backgroundImage: "url('background.png')"}}>
-      <div className="w-1/2">
+    <div className="flex flex-col justify-between py-2 bg-no-repeat bg-cover md:flex-row md:px-72" style={{backgroundImage: "url('background.png')"}}>
+      <div className="md:w-1/2">
       <Image src={knifebottom} priority={true}></Image>
       </div>
       <div className="flex flex-col justify-center px-10 text-base text-white text-opacity-75 md:w-1/2 font-mlp">
@@ -331,12 +331,12 @@ function decreaseCounter(){
         <p>Join our discord and follow our projects closely.</p>
         <p>All of our announcements will first be available on it.</p>
         <p>Don't miss what's coming soon.</p>
-        <a href="http://discord.gg/bgXWdSsXZx"><button className="w-2/3 px-12 py-4 mt-6 text-white duration-300 transform bg-blue-discord hover:scale-110">Join our Discord</button></a>
+        <a href="http://discord.gg/bgXWdSsXZx"><button className="w-full px-12 py-4 mt-6 text-white duration-300 transform md:w-2/3 bg-blue-discord hover:scale-110">Join our Discord</button></a>
       
       </div>
       
     </div>
-    <div className="py-12 text-white md:px-72 font-mlp">
+    <div className="px-10 py-12 text-white md:px-72 font-mlp">
       <p className="text-xl"> Knives Legacy</p>
       <p className="text-sm text-brown-knife"> 4,444 Knives which need soldiers</p>
       <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
