@@ -148,11 +148,11 @@ export function ConnectWallet() {
 //   return <button className="px-12 py-2 font-bold text-white bg-pink-500 rounded" onClick={connect}>Connect</button>
     if (account.length > 0){
         if (chainId == contractChainId){
-            return <button className="px-4 py-3 text-sm text-white transition duration-300 ease-out transform bg-black border font-mlp md:px-4 hover:bg-pink-mekaverse hover:scale-110 hover:border-opacity-0">{String(account).substring(0, 6) +
+            return <button className="px-4 py-3 text-sm text-white transition duration-300 ease-out transform bg-black border font-mlp md:px-4 hover:bg-pink-mekaverse hover:scale-110">{String(account).substring(0, 6) +
           "..." +
           String(account).substring(38)}</button>
         } else {
-            return <button className="px-4 py-3 text-sm text-white transition duration-300 ease-out transform bg-black border font-mlp md:px-4 hover:scale-110 hover:border-opacity-0 hover:bg-white" onClick={switchNetwork}>Switch to Avalanche</button>
+            return <button className="px-4 py-3 text-sm text-white transition duration-300 ease-out transform bg-black border font-mlp md:px-4 hover:scale-110 hover:border-opacity-0 hover:bg-pink-mekaverse" onClick={switchNetwork}>Switch to Avalanche</button>
         }
     } else {
          return <button className="px-4 py-3 text-sm text-white transition duration-300 ease-out transform bg-black border font-mlp md:px-4 hover:scale-110 hover:border-opacity-0 hover:bg-pink-mekaverse" onClick={connect}><span>Connect Wallet</span></button>
