@@ -60,7 +60,7 @@ async function loadNFTs() {
        }
        return item
       }))
-    console.log(items)
+    // console.log(items)
     setNfts(items)
     // setLoadingState('loaded') 
     // console.log("test")

@@ -192,6 +192,7 @@ export default function CreateItem() {
     //   console.log("yo")
     //   transaction = await contract.mint(n_nft)
     // } else {
+    console.log(total_cost_wei)
     transaction = await contract.mint(n_nft, {value:total_cost_wei})
     // }
     console.log("Mining...", transaction.hash)
@@ -300,9 +301,9 @@ function decreaseCounter(){
     <div className="flex flex-col-reverse justify-between py-16 bg-black md:flex-row md:px-60" id="mint">
       <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
         <h1 className="mb-2 text-4xl text-pink-mekaverse">4,444 unique Knives</h1>
-        <h1 className="mb-6 text-4xl">which need Soldiers.</h1>
+        <h1 className="mb-6 text-4xl">looking for its army.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
-        <p className="mb-3 text-brown-knife">Each artwork is original, with its own color palette and creation. <br></br> The objective was to make each Knife unique in order to prioritize quality over quantity.</p>
+        <p className="mb-3 text-brown-knife">Each artwork is original. We have decided to produce a limited amount of knives in our collection, so hurry up and grab yours.</p>
         
         <div className="flex w-full mx-auto md:w-4/5">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
@@ -338,7 +339,7 @@ function decreaseCounter(){
     </div>
     <div className="px-10 py-12 text-white md:px-72 font-mlp">
       <p className="text-xl"> Knives Legacy</p>
-      <p className="text-sm text-brown-knife"> 4,444 Knives which need soldiers</p>
+      <p className="text-sm text-brown-knife"> 4,444 Knives looking for an army.</p>
       <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
     </div>
     {/* <div className="grid grid-cols-1 gap-10 px-10 pt-4 mx-auto sm:grid-cols-1 lg:grid-cols-6"> 
