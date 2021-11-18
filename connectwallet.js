@@ -109,6 +109,7 @@ export function ConnectWallet() {
                 dispatch(updateChainHex(_chainHex));
                 window.location.reload();
             });
+            window.location.reload();
             // Add listeners end
             // } else {
             // dispatch(connectFailed("Change network to Rinkeby."));
