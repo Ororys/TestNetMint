@@ -37,7 +37,7 @@ function main() {
         case 8:
           KnivesLegacy = _context.sent;
           _context.next = 11;
-          return regeneratorRuntime.awrap(KnivesLegacy.deploy("KnivesLegacy", "KNIVES", "https://ipfs.io/ipfs/QmPng9SjXxB3Vsud6h2rZPPjnVgSWFN1eGKRaAJ8JfFVfd/", "0x0"));
+          return regeneratorRuntime.awrap(KnivesLegacy.deploy("KnivesLegacy", "KNIVES", "https://ipfs.io/ipfs/QmPng9SjXxB3Vsud6h2rZPPjnVgSWFN1eGKRaAJ8JfFVfd/", "0xd9d2176F94135824Ba8D5768ba8edb61D08E21f4"));
 
         case 11:
           knives_legacy = _context.sent;

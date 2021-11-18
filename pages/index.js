@@ -86,7 +86,13 @@ export default function CreateItem() {
     const contract = new ethers.Contract(nftaddress, NFT.abi, provider)
     let tcounter = await contract.totalSupply()
     // console.log(tcounter)
-    setMintCounter(mintCounter => tcounter.toNumber())
+    tcounter = tcounter.toNumber()
+    if (tcounter > 20) {
+      setMintCounter(mintCounter => tcounter)
+    } else {
+      setMintCounter(0)
+    }
+    
     // console.log(tcounter)
     // console.log(chainId)
   }
@@ -192,7 +198,6 @@ export default function CreateItem() {
     //   console.log("yo")
     //   transaction = await contract.mint(n_nft)
     // } else {
-    console.log(total_cost_wei)
     transaction = await contract.mint(n_nft, {value:total_cost_wei})
     // }
     console.log("Mining...", transaction.hash)
@@ -205,8 +210,13 @@ export default function CreateItem() {
       setLoading(loading => false)
     }
     
-    const tcounter = await contract.totalSupply()
-    setMintCounter(mintCounter => tcounter.toNumber())
+    let tcounter = await contract.totalSupply()
+    tcounter = tcounter.toNumber()
+    if (tcounter > 20) {
+      setMintCounter(mintCounter => tcounter)
+    } else {
+      setMintCounter(0)
+    }
     // const available_mint = await contract.getAvaliableMint()
     // setUserCounter(userCounter => available_mint.toNumber())
   }
