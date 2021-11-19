@@ -322,7 +322,7 @@ function decreaseCounter(){
           <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-pink-mekaverse hover:border-opacity-0 hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
         </div>
         <div className="w-full py-4 mx-auto mb-3 text-center text-white bg-black border border-white md:w-4/5">{mintCounter}/4,444 already minted</div>
-        <Countdown className="mx-auto" date="2021-11-19T19:00:00" renderer={renderer}/>
+        {/* <Countdown className="mx-auto" date="2021-11-19T19:00:00" renderer={renderer}/> */}
       </div>
       <div className="px-10 py-10 md:w-1/2">
       <Image src={knifepng} priority={true} alt="sideknife"></Image>
