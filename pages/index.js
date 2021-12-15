@@ -17,6 +17,7 @@ import knifepng4 from '../public/4.png';
 import knifepng5 from '../public/5.png';
 import knifepng6 from '../public/6.png';
 import knifepng7 from '../public/7.png';
+import avaxlogo from '../public/avaxlogo.svg';
 import knifebottom from '../public/knifebottom.png';
 // import vpunkgif from '../public/vpunkgif.gif';
 // import Ponyata from '../public/ponyata.gif';
@@ -217,8 +218,6 @@ export default function CreateItem() {
     } else {
       setMintCounter(0)
     }
-    // const available_mint = await contract.getAvaliableMint()
-    // setUserCounter(userCounter => available_mint.toNumber())
   }
 
 
@@ -314,6 +313,10 @@ function decreaseCounter(){
         <h1 className="mb-6 text-4xl">looking for its army.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
         <p className="mb-3 text-brown-knife">Each artwork is original. We have decided to produce a limited amount of knives in our collection, so hurry up and grab yours.</p>
+        <div className="flex justify-start gap-2 mb-4">
+          <p className="text-white">Knife mint price: 1</p>
+          <Image src={avaxlogo} height="16px" width="16px"></Image>
+        </div>
         
         <div className="flex w-full mx-auto md:w-4/5">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
