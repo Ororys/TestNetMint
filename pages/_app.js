@@ -141,7 +141,12 @@ function MyApp({ Component, pageProps }) {
               </Link>
               <Link href="/mynfts">
               <a className="text-base text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
-                My Knives
+                My NFTs
+              </a>
+              </Link>
+              <Link href="/soldiers">
+              <a className="text-base text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                Soldiers
               </a>
               </Link>
               <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 ease-out transform border border-white hover:scale-110 hover:bg-pink-mekaverse"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
@@ -165,7 +170,12 @@ function MyApp({ Component, pageProps }) {
               </Link>
               <Link href="/mynfts">
               <a className="text-xs text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
-                Knives
+                My NFTs
+              </a>
+              </Link>
+              <Link href="/soldiers">
+              <a className="text-base text-white duration-300 font-mlp transtion hover:text-pink-mekaverse">
+                Soldiers
               </a>
               </Link>
               <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="ml-4"><Image priority={true} src={twitter}  alt="twitter" /></a>

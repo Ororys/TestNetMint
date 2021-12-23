@@ -6,13 +6,16 @@ import Web3Modal from "web3modal"
 import { useSelector } from 'react-redux';
 
 import {
- nftaddress, contractChainId
+ nftaddress, contractChainId, soldieraddress
 } from '../config'
 
 import NFT from '../artifacts/contracts/KnivesLegacy.sol/KnivesLegacy.json'
+import Soldier from '../artifacts/contracts/Soldiers.sol/Soldiers.json'
+
 
 export default function MyAssets() {
   const [nfts, setNfts] = useState([])
+  const [soldiers, setSoldiers] = useState([])
   const [loadingState, setLoadingState] = useState('not-loaded')
   const [isApproved, setIsApproved] = useState(true)
   // const [formInput, updateFormInput] = useState({ price: '' })
@@ -21,6 +24,7 @@ export default function MyAssets() {
   useEffect(() => {
     if (chainId == contractChainId) {
       loadNFTs()
+      loadSoldiers()
     }
   }, [chainId])
  
@@ -43,20 +47,7 @@ async function loadNFTs() {
          tokenId: i.toNumber(),
          name: meta.data.name,
          image: meta.data.image,
-         nattr0: meta.data.attributes[0].trait_type,
-         nattr1: meta.data.attributes[1].trait_type,
-         nattr2: meta.data.attributes[2].trait_type,
-         nattr3: meta.data.attributes[3].trait_type,
-         nattr4: meta.data.attributes[4].trait_type,
-         nattr5: meta.data.attributes[5].trait_type,
-         nattr6: meta.data.attributes[6].trait_type,
-         attr0: meta.data.attributes[0].value,
-         attr1: meta.data.attributes[1].value,
-         attr2: meta.data.attributes[2].value,
-         attr3: meta.data.attributes[3].value,
-         attr4: meta.data.attributes[4].value,
-         attr5: meta.data.attributes[5].value,
-         attr6: meta.data.attributes[6].value,
+         attributes: meta.data.attributes,
        }
        return item
       }))
@@ -64,6 +55,72 @@ async function loadNFTs() {
     setNfts(items)
     // setLoadingState('loaded') 
     // console.log("test")
+  }
+
+  async function loadSoldiers() {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+
+    // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
+    const tokenContract = new ethers.Contract(soldieraddress, Soldier.abi, signer)
+    const tokenids = await tokenContract.walletOfOwner()
+    // const data = await marketContract.fetchItemsPurchased()
+    const items = await Promise.all(tokenids.map(async i => {
+       const tokenUri = await tokenContract.tokenURI(i)
+      //  console.log(tokenUri)
+       const meta = await axios.get(tokenUri)
+       let item = {
+         tokenId: i.toNumber(),
+         name: meta.data.name,
+         image: meta.data.image,
+         attributes: meta.data.attributes,
+       }
+       return item
+      }))
+    // console.log(items)
+    setSoldiers(items)
+    // setLoadingState('loaded') 
+    // console.log("test")
+  }
+
+  async function transferNft(nft){
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
+    // console.log(account, nft.receiver, nft.tokenId)
+    let transaction = await tokenContract["safeTransferFrom(address,address,uint256)"](account, nft.receiver, nft.tokenId)
+    await transaction.wait()
+    loadNFTs()
+
+  }
+
+  async function transferNftSoldier(nft){
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const tokenContract = new ethers.Contract(soldieraddress, Soldier.abi, signer)
+    // console.log(account, nft.receiver, nft.tokenId)
+    let transaction = await tokenContract["safeTransferFrom(address,address,uint256)"](account, nft.receiver, nft.tokenId)
+    await transaction.wait()
+    loadSoldiers()
+
+  }
+  async function updateReceiver(nft_index , receiver){
+    let newArr = [...nfts]; // copying the old datas array
+    newArr[nft_index].receiver = receiver;
+    setNfts(newArr);
+    // console.log(newArr)
+  }
+  async function updateReceiverSoldier(nft_index , receiver){
+    let newArr = [...soldiers]; // copying the old datas array
+    newArr[nft_index].receiver = receiver;
+    setSoldiers(newArr);
+    // console.log(newArr)
   }
 
 //   async function listNft(nft) {
@@ -142,13 +199,26 @@ async function loadNFTs() {
                 <img src={nft.image} />
                 <div className="p-4 bg-black-light">
                 <p className="mb-2 text-base text-white font-mlp">{nft.name}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr0}: {nft.attr0}</p>
+                <div className='h-48 max-h-full'>
+                  {nft.attributes.map((attribute, j) => (
+                    <p key={j} className="mb-2 text-xs text-white font-mlp">{attribute.trait_type}: {attribute.value}</p>
+                  ))}
+                </div>
+                <div>
+                  <input
+                      placeholder="0x Wallet Address"
+                      className="w-full pt-2 pb-2 pl-2 pr-2 mt-2 text-xs placeholder-black placeholder-opacity-50 bg-white border font-mlp focus:placeholder-transparent"
+                      onChange={e => updateReceiver(i, e.target.value)}
+                      // onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
+                    /><button className="w-full py-2 mt-2 text-black bg-white hover:bg-opacity-25 hover:text-black font-mlp" onClick={() => transferNft(nft)}>Transfer</button>
+                  </div>
+                {/* <p className="mb-2 text-xs text-white font-mlp">{nft.nattr0}: {nft.attr0}</p>
                 <p className="mb-2 text-xs text-white font-mlp">{nft.nattr1}: {nft.attr1}</p>
                 <p className="mb-2 text-xs text-white font-mlp">{nft.nattr2}: {nft.attr2}</p>
                 <p className="mb-2 text-xs text-white font-mlp">{nft.nattr3}: {nft.attr3}</p>
                 <p className="mb-2 text-xs text-white font-mlp">{nft.nattr4}: {nft.attr4}</p>
                 <p className="mb-2 text-xs text-white font-mlp">{nft.nattr5}: {nft.attr5}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr6}: {nft.attr6}</p>
+                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr6}: {nft.attr6}</p> */}
 
 
 
@@ -157,12 +227,45 @@ async function loadNFTs() {
         
                 </div>
               </div>
+              
             ))
           }
         </div>
        
         
       </div>
+      <div className="mt-16 p-4">
+      
+        <h2 className="py-4 mb-10 text-4xl text-center text-pink-mekaverse font-mlp">My Soldiers</h2>
+        
+        {/* <div className="grid grid-cols-1 gap-10 pt-4 sm:grid-cols-2 lg:grid-cols-5"> */}
+        <div className="grid grid-cols-1 gap-10 pt-4 sm:grid-cols-1 lg:grid-cols-4"> 
+          {
+            soldiers.map((nft, i) => (
+              <div key={i} className="overflow-hidden transition ease-out transform shadow-2xl hover:scale-110 duration-30">
+                <img src={nft.image} className="rendering-pixelated"/>
+                <div className="p-4 bg-black-light">
+                <p className="mb-2 text-base text-white font-mlp">{nft.name}</p>
+                  {nft.attributes.map((attribute, j) => (
+                    <p key={j} className="mb-2 text-xs text-white font-mlp">{attribute.trait_type}: {attribute.value}</p>
+                  ))}
+                  <div>
+                  <input
+                      placeholder="0x Wallet Address"
+                      className="w-full pt-2 pb-2 pl-2 pr-2 mt-2 text-xs placeholder-black placeholder-opacity-50 bg-white border font-mlp focus:placeholder-transparent"
+                      onChange={e => updateReceiverSoldier(i, e.target.value)}
+                      // onChange={e => updateFormInput({ ...formInput, price: e.target.value })}
+                    /><button className="w-full py-2 mt-2 text-black bg-white hover:bg-opacity-25 hover:text-black font-mlp" onClick={() => transferNftSoldier(nft)}>Transfer</button>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        {/* <p className="mt-10 font-mlp">Listing fee: 0.02 🔺 </p>
+        <p className="mt-2 font-mlp">Trading fee: 4% of the sale price</p> */}
+      </div>
+
     </div>
   )
 }

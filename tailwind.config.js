@@ -15,6 +15,9 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
+      grey: {
+        DEFAULT: "#2D2D2D"
+      },
       blue: {
         twitter:"#1DA1F2",
         light: '#52ccd6',
