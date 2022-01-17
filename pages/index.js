@@ -88,11 +88,12 @@ export default function CreateItem() {
     let tcounter = await contract.totalSupply()
     // console.log(tcounter)
     tcounter = tcounter.toNumber()
-    if (tcounter > 20) {
-      setMintCounter(mintCounter => tcounter)
-    } else {
-      setMintCounter(0)
-    }
+    setMintCounter(mintCounter => tcounter)
+    // if (tcounter > 20) {
+    //   setMintCounter(mintCounter => tcounter)
+    // } else {
+    //   setMintCounter(0)
+    // }
     
     // console.log(tcounter)
     // console.log(chainId)

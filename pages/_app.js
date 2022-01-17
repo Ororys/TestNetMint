@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { store, connect } from "../store";
 import { Provider } from "react-redux";
 import { ConnectWallet } from "../connectwallet";
+import { ClaimRewards } from "../claimrewards";
 // import { Display } from "../display";
 // import { ContractBalance } from '../contract-balance';
 import twitter from '../public/twitter.svg';
@@ -94,7 +95,7 @@ function MyApp({ Component, pageProps }) {
         </div>
       </nav> */}
       <nav className="bg-black">
-        <div className="max-w-5xl mx-auto shadow">
+        <div className="max-w-6xl mx-auto shadow">
         {/* max-w-6xl  */}
           <div className="flex px-6 py-8 md:justify-between md:py-14">
 
@@ -151,6 +152,7 @@ function MyApp({ Component, pageProps }) {
               </Link>
               <a href="https://twitter.com/KnivesLegacyNFT" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 ease-out transform border border-white hover:scale-110 hover:bg-pink-mekaverse"><Image priority={true} src={twitter}  width={17} alt="twitter" /></a>
               <a href="http://discord.gg/bgXWdSsXZx" target="_blank" rel="noreferrer" className="pt-2 pb-1 pl-3 pr-3 duration-300 ease-out transform border border-white hover:scale-110 hover:bg-pink-mekaverse"><Image priority={true} src={discord} width={17} alt="discord" /></a>
+              <ClaimRewards />
               <ConnectWallet />
             </div>
 
