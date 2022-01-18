@@ -11,4 +11,4 @@
 export const nftaddress = "0x7be6026396eb71465A78154C3dcEdA5B5b5b4269"
 export const soldieraddress = "0x606123FC1aEdb235c61F40dD3fc18C22534AeA6C"
 export const royaltyaddress = "0x561dfC2DAF1c9AB6A167cDc32DfC58347DAa5BB5"
-export const contractChainId = 1
+export const contractChainId = 43114//1
