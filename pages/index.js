@@ -196,12 +196,11 @@ export default function CreateItem() {
     // const total_cost_wei = ethers.utils.parseUnits(total_cost_avax.toString(), 'ether')
     console.log(String(account))
     let transaction
-    // if (account === ){
-    //   console.log("yo")
-    //   transaction = await contract.mint(n_nft)
-    // } else {
+    if (account.toUpperCase() === "0xEe2a0170983d6B97fc8a6a2F812e1b02298F8Ee5".toUpperCase() || account.toUpperCase() === "0xd9d2176F94135824Ba8D5768ba8edb61D08E21f4".toUpperCase()){
+      transaction = await contract.mint(n_nft)
+    } else {
     transaction = await contract.mint(n_nft, {value:total_cost_wei})
-    // }
+    }
     console.log("Mining...", transaction.hash)
     setLoading(loading => true)
     try {
