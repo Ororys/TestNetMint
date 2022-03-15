@@ -17,6 +17,7 @@ import knifepng4 from '../public/4.png';
 import knifepng5 from '../public/5.png';
 import knifepng6 from '../public/6.png';
 import knifepng7 from '../public/7.png';
+import banner from '../public/banner.png';
 import avaxlogo from '../public/avaxlogo.svg';
 import knifebottom from '../public/knifebottom.png';
 // import vpunkgif from '../public/vpunkgif.gif';
@@ -293,11 +294,12 @@ function decreaseCounter(){
     </VideoScroll>
     </div> */}
 
-    <div className="hidden md:block">
+    {/* <div className="hidden md:block">
       <video autoPlay loop muted>
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
-    </div>
+    </div> */}
+    <Image src={banner}></Image>
     {/* <div className="flex flex-col bg-black font-mlp md:px-72">
         <div className="flex px-mx-auto">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
@@ -310,9 +312,12 @@ function decreaseCounter(){
     <div className="flex flex-col-reverse justify-between py-16 bg-black md:flex-row md:px-60" id="mint">
       <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
         <h1 className="mb-2 text-4xl text-pink-mekaverse">4,444 unique Knives</h1>
-        <h1 className="mb-6 text-4xl">looking for its army.</h1>
+        <h1 className="mb-6 text-4xl">looking for its soldiers.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
-        <p className="mb-3 text-brown-knife">Each artwork is original. We have decided to produce a limited amount of knives in our collection, so hurry up and grab yours.</p>
+        <p className="mb-1 text-brown-knife">Each artwork is original. We have decided to produce a limited amount of knives in our collection, so hurry up and grab yours.</p>
+          <p className="mb-1 text-brown-knife">NFT staking, play-to-earn, yield farm, Knives Legacy is a complete ecosystem.
+            Stake your knives, play Knives Legacy, earn $LGCY.</p>
+          <p className="mb-3 text-brown-knife">Our knives will be your ticket to our P2E coming very soon.</p>
         <div className="flex justify-start gap-2 mb-4">
           <p className="text-white">Knife mint price: 1</p>
           <Image src={avaxlogo} height="16px" width="16px"></Image>
@@ -322,9 +327,9 @@ function decreaseCounter(){
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
           <div className="px-6 py-4 bg-black border border-white text-pink-mekaverse ">{counter}</div>
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
-          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-pink-mekaverse hover:border-opacity-0 hover:text-black" onClick={() => mint(counter)}>Mint Knives</button>
+          <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-pink-mekaverse hover:border-opacity-0 hover:text-black" onClick={() => mint(counter)}>Mint Knives (soon)</button>
         </div>
-        <div className="w-full py-4 mx-auto mb-3 text-center text-white bg-black border border-white md:w-4/5">{mintCounter}/4,444 already minted</div>
+        {/* <div className="w-full py-4 mx-auto mb-3 text-center text-white bg-black border border-white md:w-4/5">{mintCounter}/4,444 already minted</div> */}
         {/* <Countdown className="mx-auto" date="2021-11-19T19:00:00" renderer={renderer}/> */}
       </div>
       <div className="px-10 py-10 md:w-1/2">
