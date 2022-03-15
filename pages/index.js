@@ -294,7 +294,8 @@ function decreaseCounter(){
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
     </div> */}
-        <Image width="1519px" src={banner}></Image>
+      <div className="flex justify-center"><Image width="2250px" height="750px" src={banner}></Image></div>
+        
     {/* <div className="flex flex-col bg-black font-mlp md:px-72">
         <div className="flex px-mx-auto">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
