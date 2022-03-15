@@ -4,10 +4,7 @@ import { ethers } from 'ethers'
 import { useRouter } from 'next/router'
 import Web3Modal from 'web3modal'
 import { useSelector } from 'react-redux';
-// import Ponygif from '../public/pony_gif.gif';
-// import vlxpunk from '../public/vlxpunk.png';
-// import vpunk from '../public/vpunk.png';
-// import vpunks from '../public/vpunks.png';
+
 
 import knifepng from '../public/knife.png';
 import knifepng1 from '../public/1.png';
@@ -20,9 +17,7 @@ import knifepng7 from '../public/7.png';
 import banner from '../public/banner.png';
 import avaxlogo from '../public/avaxlogo.svg';
 import knifebottom from '../public/knifebottom.png';
-// import vpunkgif from '../public/vpunkgif.gif';
-// import Ponyata from '../public/ponyata.gif';
-// import Ponyspeed from '../public/ponyspeed.gif';
+
 import AlternateTimeline from "../timeline";
 import Countdown from "react-countdown";
 import dynamic from 'next/dynamic'
@@ -299,7 +294,7 @@ function decreaseCounter(){
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
     </div> */}
-    <Image src={banner}></Image>
+        <Image width="1519px" src={banner}></Image>
     {/* <div className="flex flex-col bg-black font-mlp md:px-72">
         <div className="flex px-mx-auto">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
