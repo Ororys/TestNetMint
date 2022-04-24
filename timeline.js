@@ -26,23 +26,26 @@ export default function AlternateTimeline() {
       <TimelineItem>
       <TimelineOppositeContent>
         <div className="p-2 text-xs text-white text-opacity-75 md:text-sm bg-black-light font-mlp">
-            <p>One week before the release of our video game,
-              we will launch the knives stacking and the final version of our APP so that you can get familiar with the interface.</p>
-            <p>You will start to produce your locked $LGCY that you will then be able to unlock via our video game. Learn more about the mechanics of Knives Legacy in our <a className='underline' href="https://docs.knives-legacy.com" rel="noreferer" target="_blank">whitepaper</a> </p>
+            <p>On May 6 (9pm UTC for WL and 10pm UTC for the public mint), we will launch our mint process.
+              This will be the beggining of the Knives Legacy story.
+              For those of you who will mint knives, you will become soldiers in our army and will be able to enjoy our P2E a few days later.
+</p>
+           
         </div>
         </TimelineOppositeContent>
         <TimelineSeparator>
           <TimelineDot className="bg-white"/>
           <TimelineConnector className="bg-white"/>
         </TimelineSeparator>
-        <TimelineContent><p className="text-xl text-white font-mlp">2. NFT Staking & APP launch</p></TimelineContent>
+        <TimelineContent><p className="text-xl text-white font-mlp">2. Mint launch</p></TimelineContent>
       </TimelineItem>
       <TimelineItem>
       <TimelineOppositeContent>
         <div className="p-2 text-xs text-white text-opacity-75 md:text-sm bg-black-light font-mlp">
-            <p>We are launching our P2E, the release is estimated for early April.</p>
-            <p>Complete missions, equip your soldier, increase your equipment and your score and unlock more and more $LGCY produced by your NFT staking.</p>
-            <p>Once unlocked, place your LGCY in farms with huge APR and drastically increase your income.</p>
+            <p>We will launch our P2E only a few days after the mint launch.
+Stake your knives, produce locked $LGCY, then complete missions, equip your soldier, increase your equipment and your score and unlock more and more $LGCY.
+Once unlocked, place your LGCY in farms with huge APR and drastically increase your income.
+              Learn more about this new P2E genre and the mechanics of Knives Legacy in our <a className='underline' href="https://docs.knives-legacy.com" rel="noreferer" target="_blank">whitepaper</a>.</p>
           </div>
 
         </TimelineOppositeContent>

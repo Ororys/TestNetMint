@@ -1,7 +1,7 @@
 /* pages/create-item.js */
 import { useEffect, useState } from 'react'
 import { ethers } from 'ethers'
-import { useRouter } from 'next/router'
+
 import Web3Modal from 'web3modal'
 import { useSelector } from 'react-redux';
 
@@ -14,17 +14,15 @@ import knifepng4 from '../public/4.png';
 import knifepng5 from '../public/5.png';
 import knifepng6 from '../public/6.png';
 import knifepng7 from '../public/7.png';
-import banner from '../public/banner.png';
+import banner from '../public/BannerFullRes.png';
 import avaxlogo from '../public/avaxlogo.svg';
 import knifebottom from '../public/knifebottom.png';
 
 import AlternateTimeline from "../timeline";
-import Countdown from "react-countdown";
-import dynamic from 'next/dynamic'
+// import Countdown from "react-countdown";
 import AliceCarousel from 'react-alice-carousel';
 import 'react-alice-carousel/lib/alice-carousel.css';
 import Image from 'next/image'
-import axios from 'axios'
 
 
 // import { VideoScroll } from 'react-video-scroll'
@@ -40,15 +38,11 @@ import {
 import NFT from '../artifacts/contracts/KnivesLegacy.sol/KnivesLegacy.json'
 
 export default function CreateItem() {
-  // const [fileUrl, setFileUrl] = useState(null)
-  // const [formInput, updateFormInput] = useState({ price: '', name: '', description: '' })
-  // const router = useRouter()
+
   const [counter, setCounter] = useState(3)
   const limit = 5
-  // const [nfts, setNfts] = useState([])  
   const [mintCounter, setMintCounter] = useState()
   const [loading, setLoading] = useState(false)
-  // const [cost, setCost] = useState(1.5);
   const chainId = useSelector((state) => state.chainId);
   const account = useSelector((state) => state.account);
   
@@ -85,101 +79,13 @@ export default function CreateItem() {
     // console.log(tcounter)
     tcounter = tcounter.toNumber()
     setMintCounter(mintCounter => tcounter)
-    // if (tcounter > 20) {
-    //   setMintCounter(mintCounter => tcounter)
-    // } else {
-    //   setMintCounter(0)
-    // }
-    
-    // console.log(tcounter)
-    // console.log(chainId)
+
   }
 
-  // async function loadNFTs() {
-  //   const web3Modal = new Web3Modal()
-  //   const connection = await web3Modal.connect()
-  //   const provider = new ethers.providers.Web3Provider(connection)
-  //   const signer = provider.getSigner()
 
-  //   // const marketContract = new ethers.Contract(nftmarketaddress, Market.abi, signer)
-  //   const tokenContract = new ethers.Contract(nftaddress, NFT.abi, signer)
-  //   const tokenids = await tokenContract.walletOfOwner()
-  //   // const data = await marketContract.fetchItemsPurchased()
-  //   const items = await Promise.all(tokenids.map(async i => {
-  //      const tokenUri = await tokenContract.tokenURI(i)
-  //     //  console.log(tokenUri)
-  //      const meta = await axios.get(tokenUri)
-  //      let item = {
-  //        tokenId: i.toNumber(),
-  //        name: meta.data.name,
-  //        image: meta.data.image,
-  //        nattr0: meta.data.attributes[0].trait_type,
-  //        nattr1: meta.data.attributes[1].trait_type,
-  //        nattr2: meta.data.attributes[2].trait_type,
-  //        nattr3: meta.data.attributes[3].trait_type,
-  //        nattr4: meta.data.attributes[4].trait_type,
-  //        nattr5: meta.data.attributes[5].trait_type,
-  //        nattr6: meta.data.attributes[6].trait_type,
-  //        attr0: meta.data.attributes[0].value,
-  //        attr1: meta.data.attributes[1].value,
-  //        attr2: meta.data.attributes[2].value,
-  //        attr3: meta.data.attributes[3].value,
-  //        attr4: meta.data.attributes[4].value,
-  //        attr5: meta.data.attributes[5].value,
-  //        attr6: meta.data.attributes[6].value,
-  //      }
-  //      return item
-  //     }))
-  //   console.log(items)
-  //   setNfts(items)
-  //   // setLoadingState('loaded') 
-  //   // console.log("test")
-  // }
 
-  // async function checkUserMinted(){
-  //   const web3Modal = new Web3Modal()
-  //   const connection = await web3Modal.connect()
-  //   const provider = new ethers.providers.Web3Provider(connection)
-  //   const signer = provider.getSigner()
-  //   const contract = new ethers.Contract(nftaddress, NFT.abi, signer)
-  //   const available_mint = await contract.getAvaliableMint()
-    
-  //   setUserCounter(userCounter => available_mint.toNumber())
-  // }
-  // async function onChange(e) {
-  //   const file = e.target.files[0]
-  //   try {
-  //     const added = await client.add(
-  //       file,
-  //       {
-  //         progress: (prog) => console.log(`received: ${prog}`)
-  //       }
-  //     )
-  //     const url = `https://ipfs.infura.io/ipfs/${added.path}`
-  //     setFileUrl(url)
-  //   } catch (error) {
-  //     console.log('Error uploading file: ', error)
-  //   }  
-  // }
-  // async function mint() {
-  //   const { name, description, price } = formInput
-  //   if (!name || !description || !price || !fileUrl) return
-  //   /* first, upload to IPFS */
-  //   const data = JSON.stringify({
-  //     name, description, image: fileUrl
-  //   })
-  //   try {
-  //     const added = await client.add(data)
-  //     const url = `https://ipfs.infura.io/ipfs/${added.path}`
-  //     /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-  //     createSale(url)
-  //   } catch (error) {
-  //     console.log('Error uploading file: ', error)
-  //   }  
-  // }
   async function mint(n_nft) {
-    // const provider = new ethers.providers.Web3Provider(window.ethereum);
-    // const signer = provider.getSigner()
+
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection)
@@ -189,7 +95,6 @@ export default function CreateItem() {
     let cost_wei = await contract.cost()
     let total_cost_wei = n_nft * cost_wei
     total_cost_wei = total_cost_wei.toString()
-    // const total_cost_wei = ethers.utils.parseUnits(total_cost_avax.toString(), 'ether')
     console.log(String(account))
     let transaction
     if (account.toUpperCase() === "0xEe2a0170983d6B97fc8a6a2F812e1b02298F8Ee5".toUpperCase() || account.toUpperCase() === "0xd9d2176F94135824Ba8D5768ba8edb61D08E21f4".toUpperCase()){
@@ -217,23 +122,7 @@ export default function CreateItem() {
   }
 
 
-  // const freemintbutton = ({account}) =>{
-  //   if (account == ""){
-  //     return <button className="flex-grow py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black" onClick={() => freemint(counter)}>Mint Knives</button>
-  //   }
 
-  // }
-  const renderer = ({ days,hours, minutes, seconds, completed }) => {
-  // if (completed) {
-  //   // Render a completed state
-  //   return <button className="self-center p-4 mt-4 font-bold transition duration-300 ease-out transform bg-white text-blue font-mlp hover:text-blue hover:bg-green hover:scale-110" onClick={mint}>
-  //         Mint: 100 VLX
-  //         </button>;
-  // } else {
-    // Render a countdown
-    return <span className="mx-auto text-xl text-white font-mlp">{days} Days {hours}:{minutes}:{seconds}</span>;
-  //}
-};
 // const setStyles = (wrapperEl, videoEl, playbackRate) => {
 //   wrapperEl.style.marginTop = `calc(180% - ${Math.floor(videoEl.duration) *
 //     playbackRate +
@@ -294,19 +183,11 @@ function decreaseCounter(){
         <source src="/MintingAnnounceFinal.mp4" type="video/mp4"/>
       </video>
     </div> */}
-      <div className="flex justify-center"><Image width="2250px" height="750px" src={banner}></Image></div>
+      <div className="flex justify-center mx-auto max-w-8xl"><Image width="2250px" height="750px" src={banner}></Image></div>
         
-    {/* <div className="flex flex-col bg-black font-mlp md:px-72">
-        <div className="flex px-mx-auto">
-          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
-          <div className="px-6 py-4 text-white bg-black border border-white ">{counter}</div>
-          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={increaseCounter}>+</button>
-          <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:scale-110 hover:bg-white hover:text-black">Mint Knives</button>
-        </div>
-        <div className="w-full py-4 text-center text-white bg-black border border-white">265/4,444 already minted</div>
-      </div> */}
-    <div className="flex flex-col-reverse justify-between py-16 bg-black md:flex-row md:px-60" id="mint">
-      <div className="flex flex-col justify-center px-10 text-white md:w-1/2 font-mlp">
+    
+    <div className="flex flex-col-reverse justify-between gap-4 px-4 py-16 mx-auto bg-black md:px-0 md:flex-row max-w-7xl" id="mint">
+      <div className="flex flex-col justify-center text-white md:w-1/2 font-mlp">
         <h1 className="mb-2 text-4xl text-pink-mekaverse">4,444 unique Knives</h1>
         <h1 className="mb-6 text-4xl">looking for its soldiers.</h1>
         <p className="mb-1 text-brown-knife">Knives Legacy is a collection of 4,444 generative Knives with hundreds of elements inspired by the CS:GO Knives universe.</p>
@@ -314,10 +195,16 @@ function decreaseCounter(){
           <p className="mb-1 text-brown-knife">NFT staking, play-to-earn, yield farm, Knives Legacy is a complete ecosystem.
             Stake your knives, play Knives Legacy, earn $LGCY.</p>
           <p className="mb-3 text-brown-knife">Our knives will be your ticket to our P2E coming very soon.</p>
-        <div className="flex justify-start gap-2 mb-4">
-          <p className="text-white">Knife mint price: 1</p>
+          <p className="text-white">Public mint date : May 6th 10pm UTC</p>
+          
+        <div className="flex justify-start gap-2">
+          <p className="text-white">Whitelist mint price: 1</p>
           <Image src={avaxlogo} height="16px" width="16px"></Image>
         </div>
+          <div className="flex justify-start gap-2 mb-4">
+            <p className="text-white">Public mint price: 1.2</p>
+            <Image src={avaxlogo} height="16px" width="16px"></Image>
+          </div>
         
         <div className="flex w-full mx-auto md:w-4/5">
           <button className="px-6 py-4 text-white duration-300 transform bg-black border border-white hover:bg-white hover:text-black" onClick={decreaseCounter}>-</button>
@@ -328,16 +215,18 @@ function decreaseCounter(){
         {/* <div className="w-full py-4 mx-auto mb-3 text-center text-white bg-black border border-white md:w-4/5">{mintCounter}/4,444 already minted</div> */}
         {/* <Countdown className="mx-auto" date="2021-11-19T19:00:00" renderer={renderer}/> */}
       </div>
-      <div className="px-10 py-10 md:w-1/2">
+      <div className="py-10 md:w-1/2">
       <Image src={knifepng} priority={true} alt="sideknife"></Image>
       </div>
     </div>
-    <AliceCarousel mouseTracking items={items} responsive={responsive} autoPlay={true} animationDuration={800} infinite={true} disableDotsControls={true} disableButtonsControls={true}/>
+    <div className='mx-auto max-w-8xl'>
+    <AliceCarousel mouseTracking items={items} responsive={responsive} autoPlay={true} animationDuration={800} infinite={true} 
+          disableDotsControls={true} disableButtonsControls={true} /></div>
     <h1 className="m-16 text-3xl text-center text-white bg-black font-mlp" id="roadmap">Roadmap</h1>
-    <div className="m-auto mb-40 bg-black md:w-2/3" ><AlternateTimeline /></div>
-    <div className="flex flex-col justify-between py-2 bg-no-repeat bg-cover md:flex-row md:px-72" style={{backgroundImage: "url('background.png')"}}>
-      <div className="md:w-1/2">
-      <Image src={knifebottom} priority={true}></Image>
+    <div className="m-auto mb-40 bg-black max-w-7xl" ><AlternateTimeline /></div>
+    <div className="flex flex-col justify-between gap-2 pt-6 mx-auto bg-no-repeat bg-cover md:px-24 md:flex-row max-w-8xl" style={{backgroundImage: "url('background.png')"}}>
+      <div className="flex justify-center pt-12 mx-auto md:w-1/2">
+        <Image src={knifebottom} height="500" width="575" priority={true}></Image>
       </div>
       <div className="flex flex-col justify-center px-10 text-base text-white text-opacity-75 md:w-1/2 font-mlp">
         <p className="mb-4 text-4xl text-white text-opacity-100">Join the community</p>
@@ -346,88 +235,18 @@ function decreaseCounter(){
         <p>Join our discord and follow our projects closely.</p>
         <p>All of our announcements will first be available on it.</p>
         <p>Don't miss what's coming soon.</p>
-        <a href="http://discord.gg/bgXWdSsXZx"><button className="w-full px-12 py-4 mt-6 text-white duration-300 transform md:w-2/3 bg-blue-discord hover:scale-110">Join our Discord</button></a>
+        <a href="http://discord.gg/bgXWdSsXZx"><button className="w-full px-12 py-4 mt-6 text-white duration-300 transform md:w-2/3 bg-blue-discord hover:scale-110">Join our Community</button></a>
       
       </div>
       
     </div>
-    <div className="px-10 py-12 text-white md:px-72 font-mlp">
+    <div className="py-12 mx-auto text-white max-w-7xl font-mlp">
       <p className="text-xl"> Knives Legacy</p>
       <p className="text-sm text-brown-knife"> 4,444 Knives looking for an army.</p>
-      <p className="text-xs text-brown-knife">© 2021 Knives Legacy</p>
+      <p className="text-xs text-brown-knife">© 2022 Knives Legacy</p>
     </div>
-    {/* <div className="grid grid-cols-1 gap-10 px-10 pt-4 mx-auto sm:grid-cols-1 lg:grid-cols-6"> 
-          {
-            nfts.map((nft, i) => (
-              <div key={i} className="overflow-hidden transition ease-out transform shadow-2xl hover:scale-110 duration-30">
-                <img src={nft.image} />
-                <div className="p-4 bg-black-light">
-                <p className="mb-2 text-sm text-white font-mlp">{nft.name}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr0}: {nft.attr0}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr1}: {nft.attr1}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr2}: {nft.attr2}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr3}: {nft.attr3}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr4}: {nft.attr4}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr5}: {nft.attr5}</p>
-                <p className="mb-2 text-xs text-white font-mlp">{nft.nattr6}: {nft.attr6}</p>
-
-
-
-
-                  
-        
-                </div>
-              </div>
-            ))
-          }
-        </div> */}
-    </div>
-    // <div>
-    // <div className="flex flex-col items-center justify-center">
-
-      
-    //    <div className="flex flex-col-reverse items-center p-10 md:mt-20 md:mb-12 md:w-3/4 md:flex-row">
-      
-    //     <div className="flex flex-col md:w-1/2">
-    //       <p className="mb-2 text-2xl text-white md:text-4xl font-mlp">Welcome to Las Velas, the new home of the Velas Punks.</p>
-    //       <p className="mt-5 mb-2 text-xl font-semibold text-white font-mlp">{counter}/10,777 VPunks</p>
-    //       {/* <Countdown date="2021-11-15T15:00:00" renderer={renderer}/> */}
-    //       <button className="self-start p-4 mt-4 font-bold transition duration-300 ease-out transform bg-green text-blue font-mlp hover:text-blue hover:bg-white hover:scale-110" onClick={mint}>
-    //         Public Mint: Coming soon
-    //       </button>
-          
-    //     </div>
-    //      <div className="flex flex-col m-5">
-
-    //       {/* <Image src={vpunkgif} alt="Picture of the author" height="480px" width="480px" className="rendering-pixelated"/> */}
-
-    //     </div>
-
-        
-    //   </div>
-    //   <div id="presale" className="flex flex-col items-center p-10 md:mt-20 md:mb-12 md:w-3/4 md:flex-row">
-      
-        
-    //      <div className="flex flex-col m-5 md:w-1/2">
-
-    //       {/* <Image src={vpunks} alt="Picture of the author"/> */}
-    //     </div>
-    //     <div className="flex flex-col m-5 md:w-1/2">
-    //       <p className="mb-2 text-2xl text-white md:text-4xl font-mlp">Presale</p>
-    //       <p className="mt-5 mb-2 font-semibold text-white font-mlp">Some punks are reserved for velas punks early adopters</p>
-    //       <p className="mt-5 mb-2 text-xl font-semibold text-white font-mlp">{counter}/1000 VPunks</p>
-    //       {/* <Countdown date="2021-11-15T13:00:00" renderer={renderer}/> */}
-    //       <button className="self-start p-4 mt-4 font-bold transition duration-300 ease-out transform bg-green text-blue font-mlp hover:text-blue hover:bg-white hover:scale-110" onClick={mint}>
-    //         Presale mint: Coming soon
-    //       </button>
-    //     </div>
-
-        
-    //   </div>
-    //   </div>
-    //   <h1 className="m-16 text-3xl text-center text-white font-mlp" id="roadmap">Roadmap</h1>
-    //   <div className="m-auto mb-40 lg:w-1/2" ><AlternateTimeline /></div>
     
-    // </div>
+    </div>
+    
   )
 }
