@@ -14,7 +14,7 @@ import knifepng4 from '../public/4.png';
 import knifepng5 from '../public/5.png';
 import knifepng6 from '../public/6.png';
 import knifepng7 from '../public/7.png';
-import banner from '../public/BannerFullRes.png';
+import banner from '../public/BannerTBA.png';
 import avaxlogo from '../public/avaxlogo.svg';
 import knifebottom from '../public/knifebottom.png';
 
@@ -195,7 +195,7 @@ function decreaseCounter(){
           <p className="mb-1 text-brown-knife">NFT staking, play-to-earn, yield farm, Knives Legacy is a complete ecosystem.
             Stake your knives, play Knives Legacy, earn $LGCY.</p>
           <p className="mb-3 text-brown-knife">Our knives will be your ticket to our P2E coming very soon.</p>
-          <p className="text-white">Public mint date : May 6th 10pm UTC</p>
+          <p className="text-white">Public mint date : May - TBA</p>
           
         <div className="flex justify-start gap-2">
           <p className="text-white">Whitelist mint price: 1</p>

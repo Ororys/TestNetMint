@@ -26,7 +26,7 @@ export default function AlternateTimeline() {
       <TimelineItem>
       <TimelineOppositeContent>
         <div className="p-2 text-xs text-white text-opacity-75 md:text-sm bg-black-light font-mlp">
-            <p>On May 6 (9pm UTC for WL and 10pm UTC for the public mint), we will launch our mint process.
+            <p>On May (TBA), we will launch our mint process.
               This will be the beggining of the Knives Legacy story.
               For those of you who will mint knives, you will become soldiers in our army and will be able to enjoy our P2E a few days later.
 </p>
