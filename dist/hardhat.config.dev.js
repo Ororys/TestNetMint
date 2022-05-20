@@ -1,6 +1,7 @@
 "use strict";
 
-// require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-waffle");
+
 require("@nomiclabs/hardhat-ethers"); // require('hardhat-deploy')
 // require("@nomiclabs/hardhat-etherscan")
 // require("hardhat-gas-reporter");

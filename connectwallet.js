@@ -11,7 +11,7 @@ export function ConnectWallet() {
     const account = useSelector((state) => state.account);
     const chainId = useSelector((state) => state.chainId);
     // const errMsg = useSelector((state) => state.errorMsg);
-
+    console.log(chainId)
     const dispatch = useDispatch();
     useEffect(() => {
         checkWallet()
@@ -127,7 +127,7 @@ export function ConnectWallet() {
         try {
             await ethereum.request({
                 method: 'wallet_switchEthereumChain',
-                params: [{ chainId: '0xa86a' }],//0xa86a AVAX 0x4 Rinkeby 0xa869 fuji 0x6a velas
+                params: [{ chainId: '0xa869' }],//0xa86a AVAX 0x4 Rinkeby 0xa869 fuji 0x6a velas
             });
             } catch (switchError) {
             // This error code indicates that the chain has not been added to MetaMask.
@@ -135,7 +135,7 @@ export function ConnectWallet() {
                 try {
                 await ethereum.request({
                     method: 'wallet_addEthereumChain',
-                    params: [{ chainId: '0xa86a', rpcUrl: 'https://...' /* ... */ }],//0xa86a AVAX 0x6a velas
+                    params: [{ chainId: '0xa869', rpcUrl: 'https://...' /* ... */ }],//0xa86a AVAX 0x6a velas
                 });
                 } catch (addError) {
                     console.log("wtf")

@@ -1,8 +1,9 @@
-// require("@nomiclabs/hardhat-waffle");
+require("@nomiclabs/hardhat-waffle");
+
 require("@nomiclabs/hardhat-ethers")
 // require('hardhat-deploy')
 // require("@nomiclabs/hardhat-etherscan")
-// require("hardhat-gas-reporter");
+require("hardhat-gas-reporter");
 require('dotenv').config()
 const KOVAN_RPC_URL = process.env.KOVAN_RPC_URL
 const POLYGON_RPC_URL = process.env.POLYGON_RPC_URL
@@ -27,6 +28,7 @@ module.exports = {
     gasPrice: 25
   },
   defaultNetwork:"hardhat",
+  
   networks: { 
     // hatdhat:{
     //   chainId: 31337
